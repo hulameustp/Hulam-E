@@ -13,7 +13,6 @@
     z-index: 999;
     padding: 0 30px;
     box-sizing: border-box;
-    transition: background-color 0.3s ease;
   }
   
   .user-nav-logo {
@@ -44,7 +43,6 @@
   padding: 0;
   font: inherit;
   cursor: pointer;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
   }
 
   .user-nav-link:hover {
@@ -105,7 +103,6 @@
     width: 30px;
     height: 30px;
     color: var(--text-primary);
-    transition: color 0.2s ease;
   }
 
   .user-modal-overlay {
@@ -129,7 +126,6 @@
     box-shadow: 0 2px 12px var(--shadow);
     text-align: center;
     width: 300px;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .user-modal-buttons {
@@ -185,7 +181,6 @@
     border-radius: 10px;
     box-shadow: 0 10px 25px var(--shadow);
     overflow: hidden;
-    transition: background-color 0.3s ease;
   }
   
   .close-button {

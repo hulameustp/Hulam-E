@@ -4,7 +4,6 @@
     background: linear-gradient(to right, var(--bg-primary) 45%, var(--accent-color) 80%);
     display: flex;
     overflow: hidden;
-    transition: background 0.3s ease;
 }
 
 .hero-left {
@@ -23,7 +22,6 @@
     font-weight: bold;
     max-width: 650px; /* adjust this value to make the text narrower or wider */
     line-height: 100px; /* optional: to improve spacing between lines */
-    transition: color 0.3s ease;
 }
 
 .highlight {
@@ -42,7 +40,6 @@
     font-weight: 400;
     max-width: 450px;
     margin-top: -50px;
-    transition: color 0.3s ease;
 }
 
 .rent-btn {

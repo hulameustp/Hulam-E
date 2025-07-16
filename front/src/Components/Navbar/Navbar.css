@@ -12,8 +12,7 @@
     box-shadow: 0 4px 4px var(--shadow);
     z-index: 999;
     padding: 0 30px;
-    box-sizing: border-box; /* very important */ 
-    transition: background-color 0.3s ease;
+    box-sizing: border-box; /* very important */
   }
   
   .login-menu {
@@ -28,7 +27,6 @@
     height: 30px;
     cursor: pointer;
     color: var(--text-primary);
-    transition: color 0.3s ease;
   }
   
   .login-nav-logo {
@@ -64,7 +62,6 @@
   .login-nav-link {
   text-decoration: none;
   color: var(--text-primary);
-  transition: color 0.3s ease, border-bottom 0.3s ease;
   }
   
   .login-nav-link:hover {
@@ -140,7 +137,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
   
     .login-menu-links {
@@ -155,7 +151,6 @@
       font-size: 16px;
       color: var(--text-primary);
       text-decoration: none;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
   
     .login-nav-link:hover,
@@ -169,30 +164,3 @@
     }
   }
 
-  /* Theme toggle button styles */
-  .theme-toggle-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-  }
-
-  .theme-toggle-btn:hover {
-    background-color: var(--bg-secondary);
-  }
-
-  .theme-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--text-primary);
-    transition: color 0.3s ease;
-  }
-
-  .theme-toggle-btn:hover .theme-icon {
-    color: var(--accent-color);
-  }
