@@ -34,8 +34,18 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Install dependencies
+# Set Composer memory limit for large installs
+ENV COMPOSER_MEMORY_LIMIT=-1
+
+# Ensure storage and bootstrap/cache exist and are writable
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Install dependencies as www-data for proper permissions
+USER www-data
 RUN composer install --no-dev --optimize-autoloader
+USER root
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html
