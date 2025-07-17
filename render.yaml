@@ -58,8 +58,3 @@ services:
         value: database
       - key: SESSION_LIFETIME
         value: "120"
-databases:
-  - name: hulam-e-mysql
-    plan: free
-    type: mysql
-    ipAllowList: []
