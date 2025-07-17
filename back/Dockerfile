@@ -31,7 +31,8 @@ RUN a2enmod headers
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy existing application directory contents
+# IMPORTANT: This Dockerfile assumes your Render build context is set to back/
+# If your build context is the repo root, use: COPY back/ /var/www/html
 COPY . /var/www/html
 
 # Set Composer memory limit for large installs
