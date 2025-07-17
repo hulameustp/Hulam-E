@@ -1,0 +1,65 @@
+services:
+  - type: web
+    name: hulam-e-app
+    env: docker
+    rootDir: back
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: APP_NAME
+        value: Hulame
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false # Set after deploy
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        sync: false # Set after deploy
+      - key: APP_LOCALE
+        value: en
+      - key: APP_FALLBACK_LOCALE
+        value: en
+      - key: APP_FAKER_LOCALE
+        value: en_US
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_STACK
+        value: single
+      - key: LOG_DEPRECATIONS_CHANNEL
+        value: null
+      - key: LOG_LEVEL
+        value: debug
+      - key: MYSQLHOST
+        sync: false
+      - key: MYSQLPORT
+        sync: false
+      - key: MYSQLUSER
+        sync: false
+      - key: MYSQLPASSWORD
+        sync: false
+      - key: MYSQLDATABASE
+        sync: false
+      - key: MYSQL_URL
+        sync: false
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: ${MYSQLHOST}
+      - key: DB_PORT
+        value: ${MYSQLPORT}
+      - key: DB_DATABASE
+        value: ${MYSQLDATABASE}
+      - key: DB_USERNAME
+        value: ${MYSQLUSER}
+      - key: DB_PASSWORD
+        value: ${MYSQLPASSWORD}
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: "120"
+databases:
+  - name: hulam-e-mysql
+    plan: free
+    type: mysql
+    ipAllowList: []
