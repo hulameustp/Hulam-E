@@ -3,7 +3,7 @@
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'storage/*'],
     'allowed_methods' => ['*'],
-    'allowed_origins' => ['http://localhost:3000', 'http://localhost:3001'], // Support both frontend ports
+    'allowed_origins' => ['http://localhost:3000', 'http://localhost:3001', 'https://*.vercel.app'], // Support both frontend ports and Vercel
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
