@@ -26,13 +26,5 @@
     "CACHE_DRIVER": "file",
     "SESSION_DRIVER": "file",
     "QUEUE_DRIVER": "sync"
-  },
-  "functions": {
-    "api/index.php": {
-      "maxDuration": 30
-    },
-    "public/index.php": {
-      "maxDuration": 30
-    }
   }
 } 
