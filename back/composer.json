@@ -1,0 +1,11 @@
+{
+    "name": "hulame/back",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "laravel/framework": "^12.21"
+    }
+}

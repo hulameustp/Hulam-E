@@ -1,0 +1,170 @@
+.login-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* fixed width */
+    height: 78px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    box-shadow: 0 4px 4px #ccc;
+    z-index: 999;
+    padding: 0 30px;
+    box-sizing: border-box; /* very important */ 
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-menu {
+    align-items: center;
+    justify-content: center;
+
+  }
+  
+  .login-menu-btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .login-nav-logo {
+    display: flex;
+    position: relative;
+    top: 0;
+    
+  }
+  
+  .login-img {
+    width: 245.14px;
+   }
+  
+   .login-nav-menu {
+    position: absolute;
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    list-style: none;
+    right: 200px;
+  }
+  
+  .login-nav-menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+  
+  .login-nav-link {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  }
+  
+  .login-nav-link:hover {
+    color: #007bff;
+  }
+  
+  /* Active link: shows "hover" effect only on the current route */
+  .login-nav-link.active, .login-nav-link.focus {
+    color: #007bff;
+    border-bottom: 3px solid #007bff;
+  }
+  
+  .login-nav-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    align-items: center;
+    width: 100%; /* if needed */
+    padding-right: 20px; /* Added padding-right for proper spacing */
+  }
+  
+  
+  .login-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    background-color: #007bff;
+    color: white;
+    right: 0;
+    transition: background-color 0.3s ease;
+  }
+
+  .login-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .login-menu-overlay {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .login-menu-btn {
+      display: flex;
+    }
+
+    .login-nav-menu {
+      display: none;
+    }
+
+    .login-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: flex;
+      justify-content: flex-end;
+      overflow-y: auto;
+    }
+  
+    .login-menu-content {
+      width: 250px;
+      background-color: #f0f0f0;
+      color: #333;
+      height: 100%;
+      padding: 20px;
+      box-shadow: -2px 0 10px #ccc;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .login-menu-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .login-nav-link {
+      display: block;
+      padding: 15px;
+      font-size: 16px;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .login-nav-link:hover,
+    .login-nav-link.active {
+      background-color: #e0e0e0;
+      color: #007bff;
+    }
+  
+    .login-menu-links li + li {
+      margin-top: 10px;
+    }
+  }

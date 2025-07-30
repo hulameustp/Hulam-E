@@ -1,0 +1,576 @@
+/* ========================= */
+/* Login Page Main Container */
+/* ========================= */
+.login-page {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #f0f2f5;
+    display: flex;
+    margin-bottom: 0;
+    transition: background-color 0.3s ease;
+}
+
+/* ========================= */
+/* Left Side Styling */
+/* ========================= */
+.login-left-side {
+    color: #fff;
+    background-color: #4f46e5;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    display: flex;
+    clip-path: ellipse(100% 100% at 0% 50%);
+    transition: background-color 0.3s ease;
+}
+
+.login-greetings {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.login-question {
+    text-align: center;
+    margin-top: 0px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.login-reg-btn {
+    color: #fff;
+    cursor: pointer;
+    background-color: #4f46e5;
+    border: 5px solid #fff;
+    border-radius: 10px;
+    margin-top: 0px;
+    padding: 0px 70px;
+    font-family: Poppins, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.login-reg-btn:hover {
+    background-color: #6366f1;
+}
+
+/* ========================= */
+/* Right Side Styling */
+/* ========================= */
+.login-logo-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    display: flex;
+    position: relative;
+}
+
+.login-login-title {
+    color: #1f2937;
+    text-shadow: 0 4px 4px #e5e7eb;
+    font-family: Poppins, sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+.formFields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.login-username,
+.login-password {
+    color: #1f2937;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    width: 385px;
+    height: 44px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #f9fafb;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.login-password {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.login-passwordInput {
+    border: none;
+    background: transparent;
+    width: 90%;
+    height: 100%;
+    outline: none;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.login-username:focus,
+.login-password:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.forgotPasswordContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 385px;
+    margin-top: -11px;
+    margin-bottom: 11px;
+}
+
+.login-forgotPasswordLink {
+    background: none;
+    border: none;
+    color: #1f2937;
+    cursor: pointer;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-forgotPasswordLink:hover {
+    color: #4f46e5;
+}
+
+.login-errorMessage {
+    color: red;
+    font-size: 12px;
+    margin-top: 10px;
+    font-family: Poppins, sans-serif;
+    text-align: left;
+    position: absolute;
+    width: 385px;
+    bottom: 255px;
+    margin-left: 10px;
+}
+
+.login-eyeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-eyeIcon {
+    width: 24px;
+    height: 24px;
+    color: #4f46e5;
+}
+
+.login-login-btn {
+    color: #fff;
+    cursor: pointer;
+    background-color: #4f46e5;
+    border: none;
+    border-radius: 10px;
+    width: 410px;
+    font-family: Poppins, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    padding: 0px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.login-login-btn:hover {
+    background-color: #6366f1;
+}
+
+.login-adminButtonContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.login-adminButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 70px;
+}
+
+/* ========================= */
+/* Responsive Breakpoints */
+/* ========================= */
+@media (max-width: 1024px) {
+    .login-greetings { font-size: 40px; }
+    .login-question { font-size: 20px; }
+    .login-reg-btn { font-size: 28px; }
+}
+
+@media (max-width: 720px) {
+    .login-left-side {
+        width: 50%;
+        clip-path: ellipse(100% 100% at 0% 50%);
+    }
+
+    .login-greetings {
+        font-size: 38px;
+        width: 50%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-question { font-size: 16px; }
+    .login-reg-btn { font-size: 24px; padding: 0px 50px; }
+    .login-logo-container { width: 55%; padding: 20px; }
+    .login-logo { width: 200px; top: -40px; right: 20px; }
+    .login-login-title { font-size: 40px; margin-bottom: 20px; }
+    .formFields { align-items: center; }
+
+    .login-username,
+    .login-password,
+    .forgotPasswordContainer { width: 300px; font-size: 14px; }
+
+    .login-passwordInput { font-size: 14px; }
+    .forgotPasswordContainer { margin-top: 5px; }
+
+    .login-errorMessage {
+        bottom: auto;
+        position: relative;
+        margin-top: -15px;
+        margin-bottom: -5px;
+        font-size: 12px;
+        width: 300px;
+    }
+
+    .login-login-btn {
+        font-size: 20px;
+        padding: 8px;
+        width: 320px;
+    }
+
+    .login-eyeIcon { width: 20px; height: 20px; }
+    .login-adminButtonContainer { bottom: 20px; right: 10px; }
+    .login-adminButton { margin-right: 10px; }
+}
+
+@media (max-width: 480px) {
+    .login-page {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 78px;
+        margin-bottom: -78px;
+    }
+
+    .login-left-side {
+        width: 100%;
+        height: 200px;
+        clip-path: ellipse(100% 100% at 50% 0%);
+        text-align: center;
+        justify-content: center;
+    }
+
+    .login-greetings { font-size: 28px; width: 100%; }
+    .login-question { font-size: 16px; }
+    .login-reg-btn { font-size: 18px; padding: 0px 30px; }
+    .login-logo-container { width: 100%; padding: 20px; margin-top: -20px; }
+
+    .login-logo {
+        position: relative;
+        width: 240px;
+        display: block;
+        margin: 0 auto;
+        margin-left: 20px;
+    }
+
+    .login-login-title { font-size: 32px; margin-top: 30px; margin-bottom: 20px; }
+    .formFields { align-items: center; }
+
+    .login-username,
+    .login-password,
+    .forgotPasswordContainer,
+    .login-errorMessage,
+    .login-login-btn {
+        width: 260px;
+        font-size: 14px;
+    }
+
+    .login-login-btn { font-size: 18px; padding: 10px; }
+    .login-eyeIcon { width: 20px; height: 20px; }
+
+    .login-errorMessage { width: 280px; font-size: 10px; }
+    .forgotPasswordContainer { margin-top: 0px; }
+    .login-login-btn { width: 275px; }
+
+    .login-adminButtonContainer {
+        position: relative;
+        margin-top: 20px;
+        right: 0;
+        bottom: 0;
+    }
+
+    .login-adminButton { margin-right: 0; }
+}
+
+/* ========================= */
+/* Admin Modal Styling */
+/* ========================= */
+
+/* Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Container */
+.modal-container {
+    background: #f9fafb;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px #e5e7eb;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid #d1d5db;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Input fields */
+.modal-form input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-form input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.modal-password-field input {
+    padding-right: 50px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Eye button */
+.modal-eye-button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    transition: color 0.3s ease;
+}
+
+.modal-eye-button:hover {
+    color: #4f46e5;
+}
+
+/* Feedback messages */
+.modal-error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 16px 0;
+    text-align: center;
+}
+
+.modal-success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #16a34a;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 16px 0;
+    text-align: center;
+}
+
+/* Modal buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-submit-btn, .modal-cancel-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-submit-btn {
+    background-color: #5998f6;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.modal-submit-btn:hover {
+    background-color: #1e40af;
+}
+
+.modal-cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.modal-cancel-btn:hover {
+    background-color: #bdbdbd;
+}
+
+/* Enhanced Error Handling Styles */
+.login-input-container {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-field-error {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-left: 4px;
+  font-weight: 500;
+  line-height: 1.3;
+  animation: slideIn 0.2s ease-out;
+}
+
+.login-username.error,
+.login-passwordInput.error {
+  border: 2px solid #ef4444 !important;
+  background-color: #fef2f2;
+}
+
+.login-username.error:focus,
+.login-passwordInput.error:focus {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced password field styling */
+.login-password {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-passwordInput {
+  width: 100%;
+  padding-right: 45px; /* Make space for eye button */
+}
+
+.login-eyeButton {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.login-eyeButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.login-eyeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-eyeIcon {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+}
+
+/* Loading state for button */
+.login-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Modal error styles */
+.modal-form .modal-error,
+.modal-form .modal-success {
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.modal-form .modal-error {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.modal-form .modal-success {
+  background-color: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-field-error {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  
+  .login-input-container {
+    margin-bottom: 12px;
+  }
+}

@@ -1,0 +1,483 @@
+.rentalPostUp {
+  background-color: #f9fafb;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  padding-top: 120px; /* Account for fixed navbar height */
+  transition: background-color 0.3s ease;
+}
+
+.rentalPostPopUp {
+  background-color: #f9fafb;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden; /* Prevent scrolling */
+  width: 100%; /* Make sure it's responsive */
+  height: 100vh; /* Ensure the height covers the full viewport */
+  position: relative; /* Ensure positioning context */
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.post-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure header width is responsive */
+  height: 78px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 10px;
+  margin-top: 0; /* Remove margin-top since container has padding-top */
+  overflow: hidden;
+}
+
+.post-logo {
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 327px;
+  padding: 10px;
+  display: flex;
+}
+
+.post-img {
+  width: 50px;
+  height: 52px;
+}
+
+.createaPost {
+  font-size: 36px;
+  background: linear-gradient(to left, #001f4d 10%, #2563eb 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: none;
+}
+
+.post-form {
+  flex-direction: column;
+  align-items: stretch;
+  width: 1440px; /* Ensure full width responsiveness */
+  max-width: 1440px; /* Fixed max-width */
+  padding-left: 200px;
+  padding-right: 100px;
+  margin-top: 5px;
+  margin-bottom: -30px;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.post-div3 {
+  padding-top: 10px;
+}
+
+.post-div4 {
+  display: flex;
+}
+
+.post-column {
+  flex-direction: column;
+  align-items: stretch;
+  width: 44%;
+  margin-left: 170px;
+  line-height: normal;
+  display: flex;
+}
+
+.post-image {
+  border: 2px solid #4b5563;
+  border-radius: 30px;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.3s ease;
+  width: 327px;
+  height: 374px;
+}
+
+.post-image:hover {
+  background-color: #f3f4f6;
+  border-color: #4f46e5;
+}
+
+.post-div5 {
+  flex-direction: column;
+  align-items: stretch;
+  display: flex;
+}
+
+.frame-post {
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.upload-icon {
+  object-fit: contain;
+  object-position: center;
+  align-self: stretch;
+  width: 45px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.upload1Photoonly {
+  color: #4b5563;
+  text-align: center;
+  margin-top: 11px;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.post-column2 {
+  flex-direction: column;
+  align-items: stretch;
+  width: 56%;
+  margin-left: -100px;
+  line-height: normal;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.post-div6 {
+  color: #4b5563;
+  align-self: stretch;
+  margin-top: -30px;
+  font-family: Poppins, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.post-btn {
+  color: #fff;
+  white-space: nowrap;
+  background-color: #4f46e5;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 40px;
+  font-family: Poppins, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+  margin: 0px auto 40px auto;
+  text-align: center;
+  margin-left: 700px;
+  transition: background-color 0.3s ease;
+}
+
+.post-btn:hover {
+  background-color: #6366f1;
+}
+
+.formInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  color: #4b5563;
+}
+
+.floating-input {
+  position: relative;
+  margin-top: 30px;
+  width: 400px;
+}
+
+.floating-input input,
+.floating-input textarea {
+  width: 100%;
+  border: 2px solid #4b5563;
+  border-radius: 10px;
+  padding: 20px 12px 8px;
+  font-family: Poppins, sans-serif;
+  background-color: #f9fafb;
+  color: #4b5563;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.floating-input label {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  background-color: #f9fafb;
+  padding: 0 4px;
+  font-size: 16px;
+  color: #9ca3af;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.floating-input input:focus,
+.floating-input textarea:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.floating-input input:focus + label,
+.floating-input input:not(:placeholder-shown) + label,
+.floating-input textarea:focus + label,
+.floating-input textarea:not(:placeholder-shown) + label {
+  top: 4px;
+  font-size: 12px;
+  color: #4f46e5;
+  background-color: #f9fafb;
+}
+
+.requiredField {
+  color: red;
+}
+
+/* Error and Success Messages */
+.post-error-message {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.post-error-message p {
+  color: #dc2626;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.post-success-message {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.post-success-message p {
+  color: #16a34a;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Image Preview */
+.image-preview-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-preview {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #4b5563;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 5px;
+  right: calc(50% - 110px);
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-image-btn:hover {
+  background-color: #b91c1c;
+}
+
+.remove-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.image-preview-text {
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+/* Disabled Button State */
+.post-btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.post-btn:disabled:hover {
+  background-color: #9ca3af;
+  transform: none;
+}
+
+/* Disabled Input States */
+input:disabled,
+textarea:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Responsive adjustments for image preview */
+@media (max-width: 768px) {
+  .image-preview {
+    width: 150px;
+    height: 120px;
+  }
+  
+  .remove-image-btn {
+    right: calc(50% - 85px);
+  }
+}
+
+/* Post Success Card */
+.post-success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 40px auto; /* Back to original margin since container has padding-top */
+  border: 2px solid #0ea5e9;
+}
+
+.success-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: bounce 0.6s ease-in-out;
+}
+
+.post-success-card h2 {
+  color: #0369a1;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.post-success-card p {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 400px;
+}
+
+.success-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.view-posts-btn, .create-another-btn {
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  min-width: 140px;
+}
+
+.view-posts-btn {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.view-posts-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+}
+
+.create-another-btn {
+  background: white;
+  color: #0369a1;
+  border: 2px solid #0ea5e9;
+}
+
+.create-another-btn:hover {
+  background: #f0f9ff;
+  transform: translateY(-2px);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive styles for success card */
+@media (max-width: 768px) {
+  .rentalPostUp {
+    padding-top: 78px; /* Maintain navbar spacing on mobile */
+  }
+  
+  .post-success-card {
+    margin: 20px 16px; /* Reduce margin and add horizontal padding on mobile */
+    padding: 30px 20px; /* Reduce padding on mobile */
+    max-width: none; /* Allow full width with margins */
+  }
+  
+  .post-success-card h2 {
+    font-size: 24px; /* Slightly smaller heading on mobile */
+  }
+  
+  .success-actions {
+    flex-direction: column; /* Stack buttons vertically on mobile */
+    gap: 12px;
+  }
+  
+  .view-posts-btn, .create-another-btn {
+    width: 100%; /* Full width buttons on mobile */
+    min-width: auto;
+  }
+}
