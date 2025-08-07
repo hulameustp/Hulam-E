@@ -1,0 +1,13 @@
+[build]
+  base = "."
+  publish = "build"
+  command = "npm run build"
+
+[build.environment]
+  REACT_APP_API_URL = "https://hulame-backend.up.railway.app/api"
+  REACT_APP_ENV = "production"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
