@@ -11,6 +11,13 @@ const api = axios.create({
   timeout: 10000, // 10 second timeout
 });
 
+// Debug: Log the API URL being used
+console.log('API Configuration:', {
+  REACT_APP_API_URL: process.env.REACT_APP_API_URL,
+  baseURL: api.defaults.baseURL,
+  fullURL: `${api.defaults.baseURL}/auth/register`
+});
+
 // Track if we're currently redirecting to avoid multiple redirects
 let isRedirecting = false;
 
