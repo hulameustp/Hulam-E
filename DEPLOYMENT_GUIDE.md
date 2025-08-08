@@ -1,45 +1,36 @@
-# Deployment Guide: Vercel (Frontend) + Railway (Backend + Database)
+# Hulam-E Deployment Guide
+
+This guide provides step-by-step instructions for deploying both the frontend (Vercel) and backend (Railway) components of the Hulam-E application.
 
 ## Prerequisites
+
 - GitHub account
-- Vercel account (free tier)
-- Railway account (free tier)
-- Git installed locally
+- Vercel account (free tier available)
+- Railway account (free tier available)
+- MySQL database (Railway provides this)
 
-## Step 1: Prepare Your Repository
+## Backend Deployment (Railway)
 
-### 1.1 Push to GitHub
-```bash
-# If not already done, push your code to GitHub
-git add .
-git commit -m "Prepare for deployment"
-git push origin main
-```
+### Step 1: Prepare Railway Project
 
-## Step 2: Deploy Backend to Railway
+1. Go to [Railway.app](https://railway.app) and sign in with GitHub
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Select your repository
+4. Set the root directory to `back/`
 
-### 2.1 Create Railway Account
-1. Go to [railway.app](https://railway.app)
-2. Sign up with your GitHub account
-3. Create a new project
+### Step 2: Configure Environment Variables
 
-### 2.2 Deploy Backend
-1. In Railway dashboard, click "New Project"
-2. Select "Deploy from GitHub repo"
-3. Choose your repository
-4. Set the root directory to `/back`
-5. Railway will automatically detect it's a PHP/Laravel project
+In your Railway project dashboard, go to the "Variables" tab and add these environment variables:
 
-### 2.3 Set Environment Variables
-In Railway dashboard, go to your project → Variables tab and add:
-
-```
-APP_NAME=Hulame
+```env
+# Application Configuration
+APP_NAME=Hulam-E
 APP_ENV=production
-APP_KEY=base64:2uGMbwjzgq2B/Lu7zyc1SxpF/8cDZl1l/6D10pyXF60=
+APP_KEY=base64:your-generated-app-key
 APP_DEBUG=false
-APP_URL=https://your-railway-app-url.railway.app
+APP_URL=https://your-railway-app-name.up.railway.app
 
+# Database Configuration (Railway will auto-generate these)
 DB_CONNECTION=mysql
 DB_HOST=${MYSQLHOST}
 DB_PORT=${MYSQLPORT}
@@ -47,183 +38,202 @@ DB_DATABASE=${MYSQLDATABASE}
 DB_USERNAME=${MYSQLUSER}
 DB_PASSWORD=${MYSQLPASSWORD}
 
-CACHE_DRIVER=file
-SESSION_DRIVER=file
-QUEUE_DRIVER=sync
-LOG_CHANNEL=stack
-LOG_LEVEL=error
-
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
+# Mail Configuration (optional for now)
+MAIL_MAILER=log
+MAIL_HOST=localhost
+MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="hello@example.com"
-MAIL_FROM_NAME="Hulame"
+MAIL_FROM_ADDRESS=noreply@hulam-e.com
+MAIL_FROM_NAME="Hulam-E"
 
-SESSION_SECURE_COOKIE=true
-SESSION_SAME_SITE=strict
+# Session Configuration
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_DOMAIN=.railway.app
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=https://hulam-e.vercel.app,https://*.vercel.app,https://*.railway.app
+
+# File Storage
+FILESYSTEM_DISK=public
+
+# Logging
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+
+# Cache
+CACHE_DRIVER=file
+
+# Queue
+QUEUE_CONNECTION=sync
+
+# Sanctum Configuration
+SANCTUM_STATEFUL_DOMAINS=hulam-e.vercel.app,*.vercel.app,*.railway.app
+SESSION_DOMAIN=.railway.app
 ```
 
-### 2.4 Add MySQL Database
-1. In Railway dashboard, click "New"
-2. Select "Database" → "MySQL"
-3. Railway will automatically link it to your backend
-4. The database variables (MYSQLHOST, MYSQLPORT, etc.) will be automatically set
+### Step 3: Add MySQL Database
 
-### 2.5 Deploy and Get Backend URL
-1. Railway will automatically deploy your backend
-2. Go to "Deployments" tab to see the deployment status
-3. Once deployed, copy the generated URL (e.g., `https://your-app-name.railway.app`)
+1. In your Railway project, click "New" → "Database" → "MySQL"
+2. Railway will automatically add the database environment variables
+3. The database will be automatically linked to your application
 
-## Step 3: Deploy Frontend to Vercel
+### Step 4: Generate App Key
 
-### 3.1 Create Vercel Account
-1. Go to [vercel.com](https://vercel.com)
-2. Sign up with your GitHub account
+1. In your Railway project, go to the "Deployments" tab
+2. Click on the latest deployment
+3. Go to the "Logs" tab
+4. Run this command in the terminal:
+   ```bash
+   php artisan key:generate
+   ```
+5. Copy the generated key and update the `APP_KEY` variable in your environment variables
 
-### 3.2 Deploy Frontend
-1. In Vercel dashboard, click "New Project"
-2. Import your GitHub repository
-3. Configure the project:
-   - **Framework Preset**: Create React App
-   - **Root Directory**: `front`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `build`
-   - **Install Command**: `npm install`
+### Step 5: Run Migrations
 
-### 3.3 Set Environment Variables
-In Vercel dashboard, go to your project → Settings → Environment Variables and add:
-
-```
-REACT_APP_API_URL=https://your-railway-backend-url.railway.app/api
-REACT_APP_ENV=production
+In the Railway terminal, run:
+```bash
+php artisan migrate --force
 ```
 
-### 3.4 Deploy
-1. Click "Deploy"
-2. Vercel will build and deploy your frontend
-3. You'll get a URL like `https://your-app-name.vercel.app`
+### Step 6: Create Storage Link
 
-## Step 4: Database Setup
-
-### 4.1 Import Database Schema
-1. In Railway dashboard, go to your MySQL database
-2. Click "Connect" → "MySQL"
-3. Use the connection details to connect via MySQL client
-4. Import your database schema from `hulame.sql`
-
-### 4.2 Alternative: Use Railway's SQL Editor
-1. In Railway dashboard, go to your MySQL database
-2. Click "Query" tab
-3. Copy and paste the contents of `hulame.sql`
-4. Execute the SQL commands
-
-## Step 5: Final Configuration
-
-### 5.1 Update CORS Settings (if needed)
-If you encounter CORS issues, update your Laravel backend:
-
-In `back/config/cors.php`:
-```php
-return [
-    'paths' => ['api/*'],
-    'allowed_methods' => ['*'],
-    'allowed_origins' => ['https://your-vercel-frontend-url.vercel.app'],
-    'allowed_origins_patterns' => [],
-    'allowed_headers' => ['*'],
-    'exposed_headers' => [],
-    'max_age' => 0,
-    'supports_credentials' => true,
-];
+```bash
+php artisan storage:link
 ```
 
-### 5.2 Test Your Deployment
-1. Test your frontend: `https://your-app-name.vercel.app`
-2. Test your backend API: `https://your-railway-backend-url.railway.app/api`
-3. Test database connectivity through your backend
+### Step 7: Set Build Command
 
-## Step 6: Custom Domains (Optional)
+In your Railway project settings, set the build command to:
+```bash
+composer install --no-dev --optimize-autoloader
+```
 
-### 6.1 Vercel Custom Domain
-1. In Vercel dashboard, go to your project → Settings → Domains
-2. Add your custom domain
-3. Configure DNS as instructed
+### Step 8: Set Start Command
 
-### 6.2 Railway Custom Domain
-1. In Railway dashboard, go to your project → Settings → Domains
-2. Add your custom domain
-3. Configure DNS as instructed
+Set the start command to:
+```bash
+php artisan serve --host 0.0.0.0 --port $PORT
+```
+
+## Frontend Deployment (Vercel)
+
+### Step 1: Prepare Vercel Project
+
+1. Go to [Vercel.com](https://vercel.com) and sign in with GitHub
+2. Click "New Project"
+3. Import your GitHub repository
+4. Set the root directory to `front/`
+5. Set the build command to: `npm run build`
+6. Set the output directory to: `build`
+
+### Step 2: Configure Environment Variables
+
+In your Vercel project settings, go to "Environment Variables" and add:
+
+```env
+REACT_APP_API_URL=https://your-railway-app-name.up.railway.app/api
+REACT_APP_NAME=Hulam-E
+REACT_APP_VERSION=1.0.0
+REACT_APP_ENABLE_DEBUG=false
+```
+
+### Step 3: Configure Domain
+
+1. In your Vercel project settings, go to "Domains"
+2. Add your custom domain or use the provided Vercel domain
+3. Update the `REACT_APP_API_URL` to match your Railway backend URL
+
+## Post-Deployment Configuration
+
+### Step 1: Update CORS Settings
+
+After both deployments are complete, update your Railway backend's CORS configuration to include your Vercel domain:
+
+1. Go to your Railway project
+2. Update the `CORS_ALLOWED_ORIGINS` environment variable to include your Vercel domain
+3. Redeploy the backend
+
+### Step 2: Test the Connection
+
+1. Visit your Vercel frontend
+2. Try to register a new user
+3. Check the browser console for any CORS errors
+4. If errors persist, check the Railway logs for backend issues
+
+### Step 3: Create Admin User
+
+In your Railway terminal, run:
+```bash
+php artisan db:seed --class=AdminUserSeeder
+```
 
 ## Troubleshooting
 
-### Common Issues:
+### CORS Issues
 
-1. **Build Failures**
-   - Check build logs in Vercel/Railway
-   - Ensure all dependencies are in package.json/composer.json
+If you're still getting CORS errors:
 
-2. **Environment Variables**
-   - Double-check all environment variables are set correctly
-   - Ensure variable names match exactly
+1. Check that your Railway domain is correctly added to the CORS allowed origins
+2. Ensure the frontend is using the correct backend URL
+3. Clear browser cache and try again
+4. Check Railway logs for any backend errors
 
-3. **Database Connection**
-   - Verify database credentials in Railway
-   - Check if database is properly provisioned
+### Database Connection Issues
 
-4. **CORS Issues**
-   - Update CORS configuration in Laravel
-   - Ensure frontend URL is in allowed origins
+1. Verify all database environment variables are set correctly
+2. Check that the MySQL database is running in Railway
+3. Ensure migrations have been run successfully
 
-5. **API Endpoints Not Working**
-   - Check if backend is deployed successfully
-   - Verify API routes are properly configured
-   - Check Railway logs for errors
+### Build Issues
 
-## Free Tier Limits
-
-### Vercel Free Tier:
-- 100GB bandwidth/month
-- 100GB storage
-- 100GB function execution time/month
-- Custom domains supported
-
-### Railway Free Tier:
-- $5 credit/month
-- Shared infrastructure
-- Automatic scaling
-- Custom domains supported
+1. Check that all dependencies are properly installed
+2. Verify the build commands are correct
+3. Check the deployment logs for specific error messages
 
 ## Monitoring
 
-### Vercel Analytics:
-- Built-in analytics in Vercel dashboard
-- Performance monitoring
-- Error tracking
+### Railway Monitoring
 
-### Railway Monitoring:
-- Built-in logs and metrics
-- Performance monitoring
-- Error tracking
+- Check the "Deployments" tab for deployment status
+- Monitor the "Logs" tab for runtime errors
+- Use the "Metrics" tab to monitor performance
 
-## Security Notes
+### Vercel Monitoring
 
-1. **Environment Variables**: Never commit sensitive data to Git
-2. **API Keys**: Store securely in environment variables
-3. **Database**: Use strong passwords and restrict access
-4. **HTTPS**: Both Vercel and Railway provide SSL by default
+- Check the "Deployments" tab for build status
+- Monitor the "Functions" tab for serverless function logs
+- Use the "Analytics" tab to monitor traffic
+
+## Security Considerations
+
+1. Never commit sensitive environment variables to your repository
+2. Use strong, unique passwords for your database
+3. Regularly update your dependencies
+4. Monitor your application logs for suspicious activity
+5. Consider implementing rate limiting for your API endpoints
 
 ## Cost Optimization
 
-1. **Vercel**: Free tier is generous for most projects
-2. **Railway**: Monitor usage to stay within $5 credit
-3. **Database**: Consider using Railway's MySQL for simplicity
-4. **CDN**: Vercel provides global CDN for free
+### Railway
+
+- Use the free tier for development
+- Monitor your usage in the "Usage" tab
+- Consider upgrading only when necessary
+
+### Vercel
+
+- The free tier includes generous limits
+- Monitor your usage in the "Usage" tab
+- Consider upgrading for custom domains or increased limits
 
 ## Support
 
-- **Vercel**: [vercel.com/support](https://vercel.com/support)
-- **Railway**: [railway.app/docs](https://railway.app/docs)
-- **Laravel**: [laravel.com/docs](https://laravel.com/docs)
-- **React**: [reactjs.org/docs](https://reactjs.org/docs)
+If you encounter issues:
+
+1. Check the deployment logs in both Railway and Vercel
+2. Review the troubleshooting section above
+3. Check the application logs for specific error messages
+4. Consider reaching out to the platform support teams

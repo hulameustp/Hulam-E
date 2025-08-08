@@ -34,6 +34,15 @@ Route::get('/test', function() {
     return response()->json(['message' => 'API is working!']);
 });
 
+// CORS test endpoint
+Route::options('/cors-test', function() {
+    return response()->json(['message' => 'CORS preflight successful']);
+});
+
+Route::post('/cors-test', function() {
+    return response()->json(['message' => 'CORS POST successful']);
+});
+
 // Simple test for rentals
 Route::get('/test-rentals', function() {
     return response()->json(['message' => 'Rentals endpoint test!']);

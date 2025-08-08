@@ -1,91 +1,139 @@
-# 🚀 Quick Deployment Reference
+# Deployment Quick Reference
 
-## 📋 Pre-Deployment Checklist
-- [ ] Netlify config removed ✅
-- [ ] Vercel config added ✅
-- [ ] Railway config ready ✅
-- [ ] API config updated ✅
-- [ ] Code pushed to GitHub
-- [ ] Environment variables prepared
+## Railway (Backend) Environment Variables
 
-## 🔧 Deployment Steps
-
-### 1. Backend (Railway)
-```
-1. Go to railway.app
-2. New Project → Deploy from GitHub
-3. Select repo, set root to /back
-4. Add MySQL database
-5. Set environment variables
-6. Deploy and get URL
-```
-
-### 2. Frontend (Vercel)
-```
-1. Go to vercel.com
-2. New Project → Import GitHub repo
-3. Set root directory to /front
-4. Set environment variables:
-   - REACT_APP_API_URL=https://your-railway-url.railway.app/api
-   - REACT_APP_ENV=production
-5. Deploy
-```
-
-### 3. Database
-```
-1. In Railway dashboard → MySQL database
-2. Query tab → Import hulame.sql
-3. Execute SQL commands
-```
-
-## 🔑 Environment Variables
-
-### Railway (Backend)
-```
-APP_NAME=Hulame
+```env
+APP_NAME=Hulam-E
 APP_ENV=production
-APP_KEY=base64:2uGMbwjzgq2B/Lu7zyc1SxpF/8cDZl1l/6D10pyXF60=
+APP_KEY=base64:your-generated-key
 APP_DEBUG=false
-APP_URL=https://your-railway-url.railway.app
+APP_URL=https://your-app-name.up.railway.app
+
 DB_CONNECTION=mysql
 DB_HOST=${MYSQLHOST}
 DB_PORT=${MYSQLPORT}
 DB_DATABASE=${MYSQLDATABASE}
 DB_USERNAME=${MYSQLUSER}
 DB_PASSWORD=${MYSQLPASSWORD}
+
+MAIL_MAILER=log
+MAIL_HOST=localhost
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=noreply@hulam-e.com
+MAIL_FROM_NAME="Hulam-E"
+
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_DOMAIN=.railway.app
+
+CORS_ALLOWED_ORIGINS=https://hulam-e.vercel.app,https://*.vercel.app,https://*.railway.app
+
+FILESYSTEM_DISK=public
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+
+SANCTUM_STATEFUL_DOMAINS=hulam-e.vercel.app,*.vercel.app,*.railway.app
 ```
 
-### Vercel (Frontend)
+## Vercel (Frontend) Environment Variables
+
+```env
+REACT_APP_API_URL=https://your-railway-app-name.up.railway.app/api
+REACT_APP_NAME=Hulam-E
+REACT_APP_VERSION=1.0.0
+REACT_APP_ENABLE_DEBUG=false
 ```
-REACT_APP_API_URL=https://your-railway-url.railway.app/api
-REACT_APP_ENV=production
+
+## Railway Commands
+
+```bash
+# Generate app key
+php artisan key:generate
+
+# Run migrations
+php artisan migrate --force
+
+# Create storage link
+php artisan storage:link
+
+# Seed admin user
+php artisan db:seed --class=AdminUserSeeder
+
+# Clear cache
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
 ```
 
-## 🆓 Free Tier Limits
+## Build Commands
 
-### Vercel
-- 100GB bandwidth/month
-- 100GB storage
-- 100GB function execution time/month
+### Railway Build Command
+```bash
+composer install --no-dev --optimize-autoloader
+```
 
-### Railway
-- $5 credit/month
-- Shared infrastructure
-- Automatic scaling
+### Railway Start Command
+```bash
+php artisan serve --host 0.0.0.0 --port $PORT
+```
 
-## 🔍 Testing URLs
-- Frontend: `https://your-app.vercel.app`
-- Backend: `https://your-app.railway.app/api`
-- Health Check: `https://your-app.railway.app/api/test`
+### Vercel Build Command
+```bash
+npm run build
+```
 
-## 🛠️ Troubleshooting
-- **Build fails**: Check logs, verify dependencies
-- **CORS errors**: Update CORS config in Laravel
-- **DB connection**: Verify Railway MySQL credentials
-- **API not working**: Check Railway logs, verify routes
+## Important URLs
 
-## 📞 Support
-- Vercel: vercel.com/support
-- Railway: railway.app/docs
-- Laravel: laravel.com/docs
-- React: reactjs.org/docs
+- **Frontend**: `https://hulam-e.vercel.app`
+- **Backend**: `https://your-railway-app-name.up.railway.app`
+- **API Base**: `https://your-railway-app-name.up.railway.app/api`
+
+## CORS Configuration
+
+The CORS configuration in `back/config/cors.php` should include:
+
+```php
+'allowed_origins' => [
+    'http://localhost:3000', 
+    'http://localhost:3001', 
+    'https://hulam-e.vercel.app',
+    'https://*.vercel.app',
+    'https://hulame-backend.up.railway.app'
+],
+'allowed_origins_patterns' => [
+    'https://*.vercel.app',
+    'https://*.railway.app'
+],
+```
+
+## Database Setup
+
+1. Add MySQL database in Railway
+2. Railway will auto-generate database environment variables
+3. Run migrations: `php artisan migrate --force`
+4. Seed admin user: `php artisan db:seed --class=AdminUserSeeder`
+
+## Troubleshooting Commands
+
+```bash
+# Check Railway logs
+railway logs
+
+# Check Vercel deployment
+vercel logs
+
+# Test API endpoint
+curl https://your-railway-app-name.up.railway.app/api/test
+
+# Check CORS headers
+curl -H "Origin: https://hulam-e.vercel.app" \
+     -H "Access-Control-Request-Method: POST" \
+     -H "Access-Control-Request-Headers: Content-Type" \
+     -X OPTIONS \
+     https://your-railway-app-name.up.railway.app/api/auth/register
+```
