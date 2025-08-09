@@ -2,12 +2,17 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://hulam-e-production.up.railway.app/api',
+  // Railway backend base URL (override via REACT_APP_API_URL on Vercel)
+  baseURL: process.env.REACT_APP_API_URL || 'https://hulame-backend.up.railway.app/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-  withCredentials: true,
+  // Important: Disable credentials to allow wildcard CORS on backend
+  // (backend sends Access-Control-Allow-Origin: *). If you plan to use
+  // cookies, switch this to true and configure backend CORS to allow
+  // specific origins and credentials.
+  withCredentials: false,
   timeout: 10000, // 10 second timeout
 });
 
