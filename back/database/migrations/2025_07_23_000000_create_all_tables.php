@@ -9,113 +9,127 @@ return new class extends Migration
     public function up()
     {
         // Cache table
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key', 255)->primary();
-            $table->mediumText('value');
-            $table->integer('expiration');
-        });
+        if (!Schema::hasTable('cache')) {
+            Schema::create('cache', function (Blueprint $table) {
+                $table->string('key', 255)->primary();
+                $table->mediumText('value');
+                $table->integer('expiration');
+            });
+        }
 
         // Cache locks table
-        Schema::create('cache_locks', function (Blueprint $table) {
-            $table->string('key', 255)->primary();
-            $table->string('owner', 255);
-            $table->integer('expiration');
-        });
+        if (!Schema::hasTable('cache_locks')) {
+            Schema::create('cache_locks', function (Blueprint $table) {
+                $table->string('key', 255)->primary();
+                $table->string('owner', 255);
+                $table->integer('expiration');
+            });
+        }
 
         // Contact messages table
-        Schema::create('contact_messages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('rental_id');
-            $table->string('rental_title', 255);
-            $table->string('owner_email', 255);
-            $table->string('sender_name', 255);
-            $table->string('sender_email', 255);
-            $table->text('message');
-            $table->timestamp('sent_at')->useCurrent()->useCurrentOnUpdate();
-            $table->timestamps();
-            $table->index(['rental_id', 'sent_at']);
-            $table->index('owner_email');
-            $table->index('sender_email');
-        });
+        if (!Schema::hasTable('contact_messages')) {
+            Schema::create('contact_messages', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('rental_id');
+                $table->string('rental_title', 255);
+                $table->string('owner_email', 255);
+                $table->string('sender_name', 255);
+                $table->string('sender_email', 255);
+                $table->text('message');
+                $table->timestamp('sent_at')->useCurrent()->useCurrentOnUpdate();
+                $table->timestamps();
+                $table->index(['rental_id', 'sent_at']);
+                $table->index('owner_email');
+                $table->index('sender_email');
+            });
+        }
 
         // Failed jobs table
-        Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('uuid', 255)->unique();
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
-            $table->timestamp('failed_at')->useCurrent();
-        });
+        if (!Schema::hasTable('failed_jobs')) {
+            Schema::create('failed_jobs', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('uuid', 255)->unique();
+                $table->text('connection');
+                $table->text('queue');
+                $table->longText('payload');
+                $table->longText('exception');
+                $table->timestamp('failed_at')->useCurrent();
+            });
+        }
 
         // Jobs table
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('queue', 255);
-            $table->longText('payload');
-            $table->unsignedTinyInteger('attempts');
-            $table->unsignedInteger('reserved_at')->nullable();
-            $table->unsignedInteger('available_at');
-            $table->unsignedInteger('created_at');
-            $table->index('queue');
-        });
+        if (!Schema::hasTable('jobs')) {
+            Schema::create('jobs', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('queue', 255);
+                $table->longText('payload');
+                $table->unsignedTinyInteger('attempts');
+                $table->unsignedInteger('reserved_at')->nullable();
+                $table->unsignedInteger('available_at');
+                $table->unsignedInteger('created_at');
+                $table->index('queue');
+            });
+        }
 
         // Job batches table
-        Schema::create('job_batches', function (Blueprint $table) {
-            $table->string('id', 255)->primary();
-            $table->string('name', 255);
-            $table->integer('total_jobs');
-            $table->integer('pending_jobs');
-            $table->integer('failed_jobs');
-            $table->longText('failed_job_ids');
-            $table->mediumText('options')->nullable();
-            $table->integer('cancelled_at')->nullable();
-            $table->integer('created_at');
-            $table->integer('finished_at')->nullable();
-        });
+        if (!Schema::hasTable('job_batches')) {
+            Schema::create('job_batches', function (Blueprint $table) {
+                $table->string('id', 255)->primary();
+                $table->string('name', 255);
+                $table->integer('total_jobs');
+                $table->integer('pending_jobs');
+                $table->integer('failed_jobs');
+                $table->longText('failed_job_ids');
+                $table->mediumText('options')->nullable();
+                $table->integer('cancelled_at')->nullable();
+                $table->integer('created_at');
+                $table->integer('finished_at')->nullable();
+            });
+        }
 
-        // Migrations table
-        Schema::create('migrations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('migration', 255);
-            $table->integer('batch');
-        });
+        // Note: Do not create the 'migrations' table here. Laravel manages this table automatically.
 
         // Notifications table
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->char('id', 36)->primary();
-            $table->string('type', 255);
-            $table->string('notifiable_type', 255);
-            $table->unsignedBigInteger('notifiable_id');
-            $table->text('data');
-            $table->timestamp('read_at')->nullable();
-            $table->timestamps();
-            $table->index(['notifiable_type', 'notifiable_id']);
-        });
+        if (!Schema::hasTable('notifications')) {
+            Schema::create('notifications', function (Blueprint $table) {
+                $table->char('id', 36)->primary();
+                $table->string('type', 255);
+                $table->string('notifiable_type', 255);
+                $table->unsignedBigInteger('notifiable_id');
+                $table->text('data');
+                $table->timestamp('read_at')->nullable();
+                $table->timestamps();
+                $table->index(['notifiable_type', 'notifiable_id']);
+            });
+        }
 
         // Password reset tokens table
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email', 255)->primary();
-            $table->string('token', 255);
-            $table->timestamp('created_at')->nullable();
-        });
+        if (!Schema::hasTable('password_reset_tokens')) {
+            Schema::create('password_reset_tokens', function (Blueprint $table) {
+                $table->string('email', 255)->primary();
+                $table->string('token', 255);
+                $table->timestamp('created_at')->nullable();
+            });
+        }
 
         // Personal access tokens table
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('tokenable_type', 255);
-            $table->unsignedBigInteger('tokenable_id');
-            $table->string('name', 255);
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
-            $table->timestamps();
-            $table->index(['tokenable_type', 'tokenable_id']);
-        });
+        if (!Schema::hasTable('personal_access_tokens')) {
+            Schema::create('personal_access_tokens', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('tokenable_type', 255);
+                $table->unsignedBigInteger('tokenable_id');
+                $table->string('name', 255);
+                $table->string('token', 64)->unique();
+                $table->text('abilities')->nullable();
+                $table->timestamp('last_used_at')->nullable();
+                $table->timestamp('expires_at')->nullable();
+                $table->timestamps();
+                $table->index(['tokenable_type', 'tokenable_id']);
+            });
+        }
 
         // Users table
+        if (!Schema::hasTable('users')) {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255);
@@ -159,8 +173,10 @@ return new class extends Migration
             $table->index('verification_status', 'users_verification_status_index');
             $table->foreign('verified_by')->references('id')->on('users')->onDelete('set null');
         });
+        }
 
         // Rentals table
+        if (!Schema::hasTable('rentals')) {
         Schema::create('rentals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
@@ -173,8 +189,10 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+        }
 
         // Rental images table
+        if (!Schema::hasTable('rental_images')) {
         Schema::create('rental_images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('rental_id');
@@ -183,10 +201,12 @@ return new class extends Migration
             $table->index('rental_id');
             $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
         });
+        }
 
         // Rental messages table
+        if (!Schema::hasTable('rental_messages')) {
         Schema::create('rental_messages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->autoIncrement();
             $table->integer('rental_id');
             $table->string('renter_email', 255);
             $table->string('sender_name', 255);
@@ -194,11 +214,14 @@ return new class extends Migration
             $table->text('message');
             $table->string('rental_title', 500);
             $table->timestamp('created_at')->useCurrent();
+            $table->primary('id');
             $table->index('rental_id', 'idx_rental_id');
             $table->index('renter_email', 'idx_renter_email');
         });
+        }
 
         // Sessions table
+        if (!Schema::hasTable('sessions')) {
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id', 255)->primary();
             $table->unsignedBigInteger('user_id')->nullable();
@@ -209,8 +232,10 @@ return new class extends Migration
             $table->index('user_id');
             $table->index('last_activity');
         });
+        }
 
         // Transactions table
+        if (!Schema::hasTable('transactions')) {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('rental_id')->nullable();
@@ -232,11 +257,14 @@ return new class extends Migration
             $table->foreign('renter_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
+        }
 
-        // Foreign keys for contact_messages
-        Schema::table('contact_messages', function (Blueprint $table) {
-            $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
-        });
+        // Foreign keys for contact_messages (skip if table already existed)
+        if (!Schema::hasTable('contact_messages')) {
+            Schema::table('contact_messages', function (Blueprint $table) {
+                $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
+            });
+        }
     }
 
     public function down()
@@ -251,7 +279,7 @@ return new class extends Migration
         Schema::dropIfExists('personal_access_tokens');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('notifications');
-        Schema::dropIfExists('migrations');
+        // Note: Do not drop the 'migrations' table here. Laravel manages this table automatically.
         Schema::dropIfExists('job_batches');
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('failed_jobs');

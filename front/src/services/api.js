@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  // Railway backend base URL (override via REACT_APP_API_URL on Vercel)
+  // Railway backend base URL (configurable via REACT_APP_API_URL environment variable)
   baseURL: process.env.REACT_APP_API_URL || 'https://hulame-backend.up.railway.app/api',
   headers: {
     'Content-Type': 'application/json',

@@ -12,6 +12,11 @@ use App\Models\Notification;
 use App\Models\User;
 use App\Models\Rental;
 
+// Global OPTIONS handler to satisfy CORS preflight requests for any API route
+Route::options('/{any}', function () {
+    return response()->noContent();
+})->where('any', '.*');
+
 // Simple test route
 Route::get('/test-simple', function() {
     return response()->json(['message' => 'Simple test route working!']);
