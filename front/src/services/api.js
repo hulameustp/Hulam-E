@@ -1,19 +1,12 @@
 import axios from 'axios';
 
-// Create axios instance with base configuration
 const api = axios.create({
-  // Railway backend base URL (configurable via REACT_APP_API_URL environment variable)
   baseURL: process.env.REACT_APP_API_URL || 'https://hulame-backend.up.railway.app/api',
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-  // Important: Disable credentials to allow wildcard CORS on backend
-  // (backend sends Access-Control-Allow-Origin: *). If you plan to use
-  // cookies, switch this to true and configure backend CORS to allow
-  // specific origins and credentials.
-  withCredentials: false,
-  timeout: 10000, // 10 second timeout
 });
 
 // Debug: Log the API URL being used

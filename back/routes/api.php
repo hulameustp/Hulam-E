@@ -12,6 +12,15 @@ use App\Models\Notification;
 use App\Models\User;
 use App\Models\Rental;
 
+// Health check endpoint for Railway
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'healthy',
+        'timestamp' => now(),
+        'service' => 'Hulame Backend API'
+    ]);
+});
+
 // Global OPTIONS handler to satisfy CORS preflight requests for any API route
 Route::options('/{any}', function () {
     return response()->noContent();

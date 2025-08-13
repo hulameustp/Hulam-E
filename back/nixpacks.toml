@@ -1,14 +1,24 @@
 [phases.setup]
-  nixPkgs = ["php", "composer"]
+  nixPkgs = ["php82", "php82Packages.composer", "mysql80", "unzip"]
 
 [phases.install]
   cmds = [
-    "composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader"
+    "composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader",
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache"
   ]
 
-# Avoid running artisan cache commands at build time since env may not be present yet
+[phases.build]
+  cmds = [
+    "php artisan migrate --force",
+    "php artisan storage:link"
+  ]
 
 [start]
-  cmd = "php -S 0.0.0.0:$PORT -t public public/index.php"
+  cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
+
+[variables]
+  PHP_VERSION = "8.2"
 
 

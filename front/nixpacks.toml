@@ -1,0 +1,18 @@
+[phases.setup]
+  nixPkgs = ["nodejs_18", "npm"]
+
+[phases.install]
+  cmds = [
+    "npm ci --production"
+  ]
+
+[phases.build]
+  cmds = [
+    "npm run build"
+  ]
+
+[start]
+  cmd = "npx serve -s build -l $PORT"
+
+[variables]
+  NODE_VERSION = "18"
